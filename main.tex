@@ -1,0 +1,70 @@
+% !Mode:: "TeX:UTF-8"
+% !TEX builder = LATEXMK
+% !TEX program = xelatex
+
+% TODO disable draft mode and enable anon if necessary
+\documentclass[twoside,AutoFakeBold]{style/gdoc}
+% \documentclass[anon,master,twoside,nocpsupervisor]{style/zjuthesis}
+
+% 插图路径设置，图片放在figures 文件夹下。一般来说论文的插图比较多，通常按章节存
+% 放，因此可以在以下命令中在按章节添加存放图片的文件夹路径。如以下这个路径中 ./
+% 代表当前main.tex所在的目录，就是一般所说的当前文件夹；figures 文件夹就是子文件
+% 夹，存放正文及附录中要用到的所有的图片，在figures 文件夹中的子文件夹就是存放各
+% 个章节图片的文件夹，一般命名与相应章节的名字相同，如intro 章节用到的图片全放在
+% 了intro 这个子文件夹下。
+% \graphicspath{%
+%     {./figures/intro/}%
+% }
+
+% 一级标题
+\title{通用文档\LaTeX{}模板}
+% 二级标题
+\secondarytitle{适用于一般文档撰写}
+% 文档编号
+\docnumber{}
+% 文档版本
+\docversion{1.0.0}
+% 文档编制人
+\author{Anonymous}
+% 文档审核人
+\docreviewer{Anonymous}
+% 文档批准人
+\docapprover{Anonymous}
+% 提交日期
+\submitdate{\today}
+% 文档联系人
+\doccontact{Anonymous}
+% 文档联系邮箱
+\docemail{anonymous@example.com}
+% 文档所属机构
+\docinstitute{浙江大学}
+% 文档所属机构
+\docenglishinstitute{Zhejiang University}
+
+\begin{document}
+
+\maketitle
+
+\frontmatter
+
+% 正文目录：
+\tableofcontents
+% 插图目录：
+% \listoffigures
+% 表格目录：
+% \listoftables
+% \include{contents/denotation}
+
+\mainmatter
+
+\include{content/introduction}
+
+\backmatter
+
+% \bibliography{main}
+% \nocite{*} % to show the entire references, annotate it if need.
+
+% \appendix
+% \include{thesis/appendixA}
+% \include{thesis/appendixB}
+\end{document}
