@@ -6,8 +6,10 @@
 Created: 2020.01.08 by Yusu Pan, Last Modified: 2020.01.08 by Yusu Pan]
 
 %---------- Option ----------
+\newif\if@copyright\@copyrightfalse
+\DeclareOption{copyright}{\@copyrighttrue}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexbook}}
-\ProcessOptions
+\ProcessOptions\relax
 \LoadClass[zihao=-4,openright,scheme=chinese]{ctexbook}
 
 %---------- 加载宏包 ----------
@@ -335,12 +337,15 @@ Created: 2020.01.08 by Yusu Pan, Last Modified: 2020.01.08 by Yusu Pan]
     \vspace{\stretch{2}}
 
     %\newpage\thispagestyle{empty}
+    \if@copyright
     \begin{quote}\footnotesize
       \textbf{（内部文档，未得许可，禁止外传）}\\
         本文档版权归\GDOC@institute 所有。\\
         Copyright~\copyright{}~\the\year~\GDOC@englishinstitute. \\
         文档作者联系方式：\GDOC@contact（\GDOC@email）.
     \end{quote}
+    \else
+    \fi
     %清空变量节省空间
     \global\let\GDOC@number\@empty
     \global\let\GDOC@version\@empty
