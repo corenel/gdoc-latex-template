@@ -689,15 +689,15 @@ Created: 2020.01.08 by Yusu Pan, Last Modified: 2020.01.08 by Yusu Pan]
 \captionsetup[figure]{position=below}
 
 % 中英文双语bicaption定义
-\captionsetup[bi-first]{bi-first}
-\captionsetup[bi-second]{bi-second, list=off}
-
 \DeclareCaptionOption{bi-first}[]{%
   \def\tablename{表}%
   \def\figurename{图}}
 \DeclareCaptionOption{bi-second}[]{%
   \def\tablename{Tab}%
   \def\figurename{Fig}}
+
+\captionsetup[bi-first]{bi-first}
+\captionsetup[bi-second]{bi-second, list=off}
 
 %% 以下为设置浮动对象和文字之间的距离。
 % 版心顶部或者版心底部浮动体之间的垂直距离，默认为12pt plus 2pt minus 2pt。
