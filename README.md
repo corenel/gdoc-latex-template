@@ -4,8 +4,8 @@ LaTeX template for general purpose documents.
 
 ## Usage
 
-0. Make sure you have installed `TeXLive` (Win/Linux) or `MacTeX`x(macOS).
-1. Install all fonts in the `fonts` directory.
+0. Make sure you have installed the latest version of `TeXLive` (Win/Linux) or `MacTeX`(macOS).
+1. Install all fonts in the following:
    - `Adobe Fangsong Std`
    - `Adobe Kaiti Std`
    - `Adobe Heiti Std`
