@@ -2,9 +2,7 @@
 % !TEX builder = LATEXMK
 % !TEX program = xelatex
 
-% TODO disable draft mode and enable anon if necessary
 \documentclass[twoside,copyright,AutoFakeBold]{style/gdoc}
-% \documentclass[anon,master,twoside,nocpsupervisor]{style/zjuthesis}
 
 % 插图路径设置，图片放在figures 文件夹下。一般来说论文的插图比较多，通常按章节存
 % 放，因此可以在以下命令中在按章节添加存放图片的文件夹路径。如以下这个路径中 ./
@@ -45,7 +43,7 @@
 
 \maketitle
 
-\include{content/version}
+\include{document/version}
 
 \frontmatter
 
@@ -55,18 +53,18 @@
 % \listoffigures
 % 表格目录：
 % \listoftables
-% \include{contents/denotation}
+% \include{document/denotation}
 
 \mainmatter
 
-\include{content/introduction}
+\include{document/introduction}
 
 \backmatter
 
-% \bibliography{main}
+% \bibliography{document}
 % \nocite{*} % to show the entire references, annotate it if need.
 
 % \appendix
-% \include{thesis/appendixA}
-% \include{thesis/appendixB}
+% \include{document/appendixA}
+% \include{document/appendixB}
 \end{document}

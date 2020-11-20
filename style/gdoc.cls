@@ -1,9 +1,9 @@
 % !Mode:: "TeX:UTF-8"
-% !TEX root = main.tex
+% !TEX root = document.tex
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{gdoc}[2020/01/08 general purpose document class.
-Created: 2020.01.08 by Yusu Pan, Last Modified: 2020.01.08 by Yusu Pan]
+\ProvidesClass{gdoc}[2020/11/20 general purpose document class.
+Created: 2020.01.08 by Yusu Pan, Last Modified: 2020.11.20 by Yusu Pan]
 
 %---------- Option ----------
 \newif\if@copyright\@copyrightfalse

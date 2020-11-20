@@ -1,8 +1,8 @@
 all:
-	xelatex main.tex && bibtex main.aux && xelatex main.tex && xelatex main.tex
+	xelatex document.tex && bibtex document.aux && xelatex document.tex && xelatex document.tex
 
 docx:
-	pandoc -s main.tex -o main.docx
+	pandoc -s document.tex -o document.docx
 
 clean:
 	find -E . -type f -iregex '.*\.(aux|log|toc|backup|acr|brf|gz|acn|xdy|alg|fdb_latexmk|fls|out|xdv|blg|bbl)$$'  -delete
