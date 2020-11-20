@@ -1,3 +1,69 @@
+% !Mode:: "TeX:UTF-8"
+% !TEX root = beamer.tex
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{GBEAMER}[2020/11/20 general purpose beamer class.
+Created: 2020.11.20 by Yusu Pan, Last Modified: 2020.11.20 by Yusu Pan]
+
+%---------- Option ----------
+\newif\if@showcopyright\@showcopyrightfalse
+\newif\if@shownote\@shownotefalse
+\newif\if@showslide\@showslidefalse
+\DeclareOption{showcopyright}{\@showcopyrighttrue}
+\DeclareOption{shownote}{\@shownotetrue}
+\DeclareOption{showslide}{\@showslidetrue}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexbeamer}}
+\ProcessOptions\relax
+\LoadClass[10pt,aspectratio=169,mathserif]{ctexbeamer}
+
+%---------- 加载宏包 ----------
+% 演讲备注
+\RequirePackage{pgfpages}
+\RequirePackage{xeCJK}
+\RequirePackage{amsmath,amsfonts,amssymb,bm}
+\RequirePackage{color}
+\RequirePackage{graphicx,hyperref,url}
+\RequirePackage{comment}
+\RequirePackage{xcolor}
+\RequirePackage{subcaption}
+\RequirePackage{booktabs}
+\RequirePackage{graphbox}
+\RequirePackage{arydshln}
+% disable this if 'show notes only'
+\if@showslide
+  \RequirePackage[super,square]{natbib}
+\fi
+
+\AtEndOfClass{
+    \hypersetup{
+        unicode,
+        % hyperfootnotes=false,
+        pdfstartview=FitH,
+        CJKbookmarks=true,
+        bookmarksnumbered=true,
+        bookmarksopen=true,
+        % colorlinks=true,      % 链接颜色默认关闭，hidelink打开。
+        % citecolor=blue,
+        % linktoc=all,
+        % linkcolor=blue,
+        % anchorcolor=blue,
+        % urlcolor=blue,
+        hidelinks,          % 隐藏超链接的颜色和边框。
+        % draft,                % 草稿模式，提高编译速度，需要时注释掉就可以了。
+    }
+}
+\AtBeginDocument{
+    \hypersetup{%
+        pdftitle={\GBEAMER@title},%
+        pdfauthor={\GBEAMER@author},%
+        pdfkeywords={},%
+        pdfcreator={LaTeX with hyperref package, using LaTeX Template
+        for general purpose beamer}
+    }
+}
+
+%---------- Beamer设置 ----------
+
 %%%
 %%% Inherit definitions from existing themes (DO NOT MODIFY THESE)
 %%%
@@ -35,6 +101,8 @@
 % Navigation symbols:
 % \setbeamertemplate{navigation symbols}{}
 
+%---------- 页面设置 ----------
+
 %%%
 %%% Tweak definitions of outer theme to match Radboud (website) style
 %%%
@@ -60,7 +128,7 @@
 }
 
 % Footline: AUTHOR | TITLE | DATE FRAMENUMBER
-\defbeamertemplate*{footline}{zjutheme}{%
+\defbeamertemplate*{footline}{gbeamertheme}{%
   \leavevmode%
   \hbox{%
   \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
@@ -79,7 +147,7 @@
 }
 
 % Headline
-\defbeamertemplate*{headline}{zjutheme}{%
+\defbeamertemplate*{headline}{gbeamertheme}{%
   \leavevmode%
   \@tempdimb=6.4375ex%
     %\multiply\@tempdimb by\beamer@sectionmax%
@@ -103,7 +171,7 @@
   \fi%
 }
 
-\defbeamertemplate*{frametitle}{zjutheme}{%
+\defbeamertemplate*{frametitle}{gbeamertheme}{%
   \nointerlineskip%
   %\vskip-2pt%
   \hbox{\leavevmode
@@ -143,4 +211,84 @@
 %    \vskip-0.2pt
 %    \hbox to\textwidth{\hskip-\Gm@lmargin\pgfuseshading{beamer@topshade}\hskip-\Gm@rmargin}
 %    \vskip-2pt
+}
+
+%---------- 版权信息设置 ----------
+
+\if@showcopyright
+  \AtBeginDocument{%
+    \addtobeamertemplate{title page}{}{%
+      \begin{quote}\footnotesize
+        \textbf{（内部文档，未得许可，禁止外传）} \\
+          本文档版权归{\insertinstitute}所有。\\
+          Copyright~\copyright{}~\the\year~{\insertinstitute}. \\
+      \end{quote}
+    }
+  }
+\fi
+
+%---------- 演讲备注设置 ----------
+
+\if@showslide
+  \if@shownote
+    \setbeameroption{show notes on second screen=right} % Both
+  \else
+    \setbeameroption{hide notes} % Only slides
+  \fi
+\else
+  \setbeameroption{show only notes} % Only notes
+\fi
+
+% To give a presentation with the Skim reader (http://skim-app.sourceforge.net) on OSX so
+% that you see the notes on your laptop and the slides on the projector, do the following:
+%
+% 1. Generate just the presentation (hide notes) and save to slides.pdf
+% 2. Generate onlt the notes (show only nodes) and save to notes.pdf
+% 3. With Skim open both slides.pdf and notes.pdf
+% 4. Click on slides.pdf to bring it to front.
+% 5. In Skim, under "View -> Presentation Option -> Synhcronized Noted Document"
+%    select notes.pdf.
+% 6. Now as you move around in slides.pdf the notes.pdf file will follow you.
+% 7. Arrange windows so that notes.pdf is in full screen mode on your laptop
+%    and slides.pdf is in presentation mode on the projector.
+
+% Give a slight yellow tint to the notes page
+\setbeamertemplate{note page}{\pagecolor{yellow!5}\insertnote}\usepackage{palatino}
+
+% reset to normal colour at the begin of every frame
+% workaround for show notes on second screen
+\makeatletter
+\def\beamer@framenotesbegin{% at beginning of slide
+    \usebeamercolor[fg]{normal text}
+    \gdef\beamer@noteitems{}%
+    \gdef\beamer@notes{}%
+}
+\makeatother
+
+%---------- 字体设置 ----------
+
+\setsansfont{Helvetica}
+%\setsansfont{Times New Roman}
+\definecolor{nvidia}{RGB}{102,156,28}
+\definecolor{red}{RGB}{184,13,73}
+\definecolor{darkred}{RGB}{145,12,7}
+\definecolor{orange}{RGB}{242,151,36}
+\definecolor{darkteal}{RGB}{43,106,108}
+\definecolor{darkgrey}{RGB}{64,64,64}
+\definecolor{darkblue}{RGB}{4,37,58}
+\definecolor{tan}{RGB}{225,221,191}
+\definecolor{green}{RGB}{76,131,122}
+\definecolor{darkgreen}{RGB}{42,50,46}
+\definecolor{bluegray}{RGB}{33,36,39}
+\definecolor{brown}{RGB}{110,54,42}
+
+%---------- Beamer主题设置 ----------
+
+\beamertemplateballitem
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>
+    \frametitle{\textbf{目录}}
+    \textbf{\tableofcontents[currentsection]}
+  \end{frame}
 }
